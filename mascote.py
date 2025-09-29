@@ -157,11 +157,12 @@ class MascoteApp:
         pyautogui.click()
 
     def keep_teams_active(self):
-        # Envia Scroll Lock via powershell
-        subprocess.Popen([
-            "powershell", "-command",
-            "[System.Windows.Forms.SendKeys]::SendWait('{SCROLLLOCK}')"
-        ], shell=True)
+        # Envia Scroll Lock multiplataforma usando pyautogui
+        try:
+            pyautogui.press('scrolllock')
+            self.log_event("Scroll Lock enviado via pyautogui.")
+        except Exception as e:
+            self.log_event(f"Falha ao enviar Scroll Lock: {e}")
 
     def log_cycle_count(self):
         log_line = f"{datetime.datetime.now():%Y-%m-%d %H:%M:%S} - Total de ciclos: {self.cycle_count}"
@@ -169,9 +170,13 @@ class MascoteApp:
             f.write(log_line + "\n")
 
 if __name__ == "__main__":
+    # Constantes de layout para facilitar futuros ajustes
+    WINDOW_WIDTH = 400
+    WINDOW_HEIGHT = 520
+
     root = tk.Tk()
     root.iconbitmap("mascote.ico")
-    root.geometry("260x360")         # Define o tamanho fixo da janela (largura x altura)
-    root.resizable(False, False)     # Impede redimensionamento
+    root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")  # Tamanho fixo da janela
+    root.resizable(False, False)  # Impede redimensionamento
     app = MascoteApp(root)
     root.mainloop()
