@@ -15,7 +15,7 @@ Requisitos:
 - Bibliotecas: tkinter, pillow, pyautogui
 
 Autor: Christian Vladimir Uhdre Mulato
-Data: Campo Largo, segunda-feira, 09 de Junho de 2025.
+Data: Campo Largo, segunda-feira, 29 de Setembro de 2025.
 """
 
 import tkinter as tk
